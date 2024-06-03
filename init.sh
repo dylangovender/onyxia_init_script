@@ -118,6 +118,7 @@ if [  "`which git`" != "" ]; then
         fi
     else
         echo "git config --global"
+        git config --global http.sslVerify false
         if [ -n "$GIT_USER_NAME" ]; then
             git config --global user.name "$GIT_USER_NAME"
         fi
@@ -185,7 +186,7 @@ fi
 
 if [[ -n "$PERSONAL_INIT_SCRIPT" ]]; then
     echo "download $PERSONAL_INIT_SCRIPT"
-    curl -k $PERSONAL_INIT_SCRIPT | bash -s -- $PERSONAL_INIT_ARGS
+    curl -k -L $PERSONAL_INIT_SCRIPT | bash -s -- $PERSONAL_INIT_ARGS
 fi
 
 if [[ -e "$HOME/work" ]]; then
