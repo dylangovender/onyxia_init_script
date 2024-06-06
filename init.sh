@@ -196,11 +196,13 @@ if [ "$EXTRA_PIP_PACKAGES" ] && [ -f "/opt/conda/bin/pip"]; then
 fi
 
 if [[ -n "$PERSONAL_INIT_SCRIPT" ]]; then
-    echo "working directory: "
+    echo "working directory: $pwd"
     pwd
-    echo "download $PERSONAL_INIT_SCRIPT"
-    wget $PERSONAL_INIT_SCRIPT
+    echo "curl $PERSONAL_INIT_SCRIPT"
+    curl --header "PRIVATE-TOKEN: $PERSONAL_INIT_ARGS" -L -O -k $PERSONAL_INIT_SCRIPT
+    echo "listing"
     ls -lrt
+    echo "bashing"
     curl --header "PRIVATE-TOKEN: $PERSONAL_INIT_ARGS" -L -O -k $PERSONAL_INIT_SCRIPT | bash -s -- $PERSONAL_INIT_ARGS
 fi
 
