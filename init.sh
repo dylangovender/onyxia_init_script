@@ -70,12 +70,20 @@ fi
 
 
 if [  "`which git`" != "" ]; then
+    git=$(which git)
+    echo "which git : $git"
+    echo "GIT_REPOSITORY: $GIT_REPOSITORY"
+    echo "GIT_PERSONAL_ACCESS_TOKEN: $GIT_PERSONAL_ACCESS_TOKEN"
+    git config --global http.sslVerify false
     if [[ -n "$GIT_REPOSITORY" ]]; then
+        echo "Git repo true"
         if [[ -n "$GIT_PERSONAL_ACCESS_TOKEN" ]]; then
+            echo "Git PAT true"
             REPO_DOMAIN=`echo "$GIT_REPOSITORY" | awk -F/ '{print $3}'`
             if [  $REPO_DOMAIN = "github.com" ]; then
                 COMMAND=`echo git clone $GIT_REPOSITORY | sed "s/$REPO_DOMAIN/$GIT_PERSONAL_ACCESS_TOKEN@$REPO_DOMAIN/"`
             else
+                "Git else true"
                 COMMAND=`echo git clone $GIT_REPOSITORY | sed "s/$REPO_DOMAIN/oauth2:$GIT_PERSONAL_ACCESS_TOKEN@$REPO_DOMAIN/"`
             fi
         else
