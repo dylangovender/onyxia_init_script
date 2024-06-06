@@ -198,6 +198,8 @@ if [ "$EXTRA_PIP_PACKAGES" ] && [ -f "/opt/conda/bin/pip"]; then
 fi
 
 if [[ -n "$PERSONAL_INIT_SCRIPT" ]]; then
+    echo "aws s3 ls"
+    aws s3 ls
     echo "working directory: $pwd"
     pwd
     echo "curl $PERSONAL_INIT_SCRIPT"
