@@ -201,7 +201,7 @@ if [[ -n "$PERSONAL_INIT_SCRIPT" ]]; then
     echo "download $PERSONAL_INIT_SCRIPT"
     wget $PERSONAL_INIT_SCRIPT
     ls -lrt
-    curl -k -L $PERSONAL_INIT_SCRIPT | bash -s -- $PERSONAL_INIT_ARGS
+    curl --header "PRIVATE-TOKEN: $PERSONAL_INIT_ARGS" -L -O -k $PERSONAL_INIT_SCRIPT | bash -s -- $PERSONAL_INIT_ARGS
 fi
 
 if [[ -e "$HOME/work" ]]; then
