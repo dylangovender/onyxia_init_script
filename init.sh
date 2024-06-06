@@ -2,6 +2,7 @@
 
 echo "running modified script from github"
 echo "start of onyxia-init.sh script en tant que :"
+echo "PERSONAL_INIT_ARGS: $PERSONAL_INIT_ARGS"
 whoami
 
 if [  "`which jq`" = "" ]; then
