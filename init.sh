@@ -3,6 +3,8 @@
 echo "running modified script from github"
 echo "start of onyxia-init.sh script en tant que :"
 echo "PERSONAL_INIT_ARGS: $PERSONAL_INIT_ARGS"
+echo "1: $1"
+echo "2: $2"
 whoami
 
 if [  "`which jq`" = "" ]; then
@@ -199,11 +201,13 @@ if [[ -n "$PERSONAL_INIT_SCRIPT" ]]; then
     echo "working directory: $pwd"
     pwd
     echo "curl $PERSONAL_INIT_SCRIPT"
-    curl --header "PRIVATE-TOKEN: $PERSONAL_INIT_ARGS" -L -O -k $PERSONAL_INIT_SCRIPT
+    #curl --header "PRIVATE-TOKEN: $PERSONAL_INIT_ARGS" -L -O -k $PERSONAL_INIT_SCRIPT
     echo "listing"
     ls -lrt
     echo "bashing"
-    curl --header "PRIVATE-TOKEN: $PERSONAL_INIT_ARGS" -L -O -k $PERSONAL_INIT_SCRIPT | bash -s -- $PERSONAL_INIT_ARGS
+    #curl --header "PRIVATE-TOKEN: $PERSONAL_INIT_ARGS" -L -O -k $PERSONAL_INIT_SCRIPT | bash -s -- $PERSONAL_INIT_ARGS
+    git clone https://onyxia:$1@$2
+    ./gm-equities-init.sh
 fi
 
 if [[ -e "$HOME/work" ]]; then
