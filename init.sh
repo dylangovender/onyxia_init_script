@@ -86,7 +86,7 @@ if [  "`which git`" != "" ]; then
                 COMMAND=`echo git clone $GIT_REPOSITORY | sed "s/$REPO_DOMAIN/$GIT_PERSONAL_ACCESS_TOKEN@$REPO_DOMAIN/"`
             else
                 echo "Git else true"
-                COMMAND=`echo git clone $GIT_REPOSITORY | sed "s/$REPO_DOMAIN/$GIT_USER_NAME:$GIT_PERSONAL_ACCESS_TOKEN@$REPO_DOMAIN/"`
+                #COMMAND=`echo git clone $GIT_REPOSITORY | sed "s/$REPO_DOMAIN/$GIT_USER_NAME:$GIT_PERSONAL_ACCESS_TOKEN@$REPO_DOMAIN/"`
                 echo "COMMAND: $COMMAND"
             fi
         else
