@@ -81,6 +81,7 @@ if [  "`which git`" != "" ]; then
             echo "Git PAT true"
             REPO_DOMAIN=`echo "$GIT_REPOSITORY" | awk -F/ '{print $3}'`
             echo "Repo_domain: $REPO_DOMAIN"
+            echo "PAT: $$GIT_PERSONAL_ACCESS_TOKEN"
             if [  $REPO_DOMAIN = "github.com" ]; then
                 COMMAND=`echo git clone $GIT_REPOSITORY | sed "s/$REPO_DOMAIN/$GIT_PERSONAL_ACCESS_TOKEN@$REPO_DOMAIN/"`
             else
