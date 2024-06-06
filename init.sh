@@ -2,9 +2,6 @@
 
 echo "running modified script from github"
 echo "start of onyxia-init.sh script en tant que :"
-echo "PERSONAL_INIT_ARGS: $PERSONAL_INIT_ARGS"
-echo "1: $1"
-echo "2: $2"
 whoami
 
 if [  "`which jq`" = "" ]; then
@@ -197,21 +194,38 @@ if [ "$EXTRA_PIP_PACKAGES" ] && [ -f "/opt/conda/bin/pip"]; then
     /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
-if [[ -n "$PERSONAL_INIT_SCRIPT" ]]; then
-    echo "aws s3 ls"
-    aws s3 ls
-    echo "working directory: $pwd"
-    pwd
-    echo "curl $PERSONAL_INIT_SCRIPT"
-    #curl --header "PRIVATE-TOKEN: $PERSONAL_INIT_ARGS" -L -O -k $PERSONAL_INIT_SCRIPT
-    echo "listing"
-    ls -lrt
-    echo "bashing"
-    #curl --header "PRIVATE-TOKEN: $PERSONAL_INIT_ARGS" -L -O -k $PERSONAL_INIT_SCRIPT | bash -s -- $PERSONAL_INIT_ARGS
-    git clone https://onyxia:$1@$2
-    ./gm-equities-init.sh
-fi
+echo "Running inits"
 
+sudo apt-get update
+sudo apt-get install -y python3 python3-pip
+pip3 install requests pandas numpy plotly scikit-learn graphviz dtreeviz pyspark
+
+python3 - <<EOF
+import os
+import datetime
+import time
+import requests
+import http.client as httplib
+import ssl
+from pdb import set_trace as bp
+import pandas as pd
+import numpy as np
+import warnings
+import plotly
+import sklearn
+import sys
+import graphviz
+import dtreeviz
+import pyspark
+
+print("All libraries are installed successfully.")
+EOF
+
+if python3 -c "import os, datetime, time, requests, http.client as httplib, ssl, pdb, pandas as pd, numpy as np, warnings, plotly, sklearn, sys, graphviz, dtreeviz, pyspark"; then
+    echo "All libraries installed successfully."
+else
+    echo "Failed to install one or more libraries."
+fi
 if [[ -e "$HOME/work" ]]; then
   if [[ $(id -u) = 0 ]]; then
     echo "cd $HOME/work" >> /etc/profile
