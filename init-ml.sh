@@ -39,20 +39,3 @@ if python3 -c "import os, datetime, time, requests, http.client as httplib, ssl,
 else
     echo "Failed to install one or more libraries."
 fi
-
-'
-
-if [[ -e "$HOME/work" ]]; then
-  if [[ $(id -u) = 0 ]]; then
-    echo "cd $HOME/work" >> /etc/profile
-  else
-    echo "cd $HOME/work" >> $HOME/.bashrc
-  fi
-fi
-
-if [ -n "$URL_INIT_SERVICE" ]; then
-    wget -O - $URL_INIT_SERVICE | bash
-fi
-
-echo "execution of $@"
-exec "$@"
